@@ -71,16 +71,17 @@ fun LoginScreen(viewModel : LoginViewModel) {
             )
             SizedBox(height = 4.0)
             Text(
-                "Welcome back you’ve \n been missed!",
+                "Welcome back you’ve\nbeen missed!",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.W400,
                 maxLines = 2
             )
             SizedBox(height = 48.0)
             TextInputField(
-                label = "Username", hint = "Please enter username",
-                onChange = { viewModel.username = it },
-                errorMessage = viewModel.usernameErrorMessage,
+                label = "Email", hint = "Please enter your email",
+                onChange = { viewModel.email = it },
+                errorMessage = viewModel.emailErrorMessage,
+                keyboardType = KeyboardType.Email,
             )
             SizedBox(height = 16.0)
             TextInputField(

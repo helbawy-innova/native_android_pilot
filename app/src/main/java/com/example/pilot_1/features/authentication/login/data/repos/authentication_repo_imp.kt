@@ -11,10 +11,7 @@ class AuthenticationRepoImp : AuthenticationRepo {
 
     override suspend fun login(username: String, password: String): Boolean {
         val response = authenticationServices.login(LoginRequestBody(username, password))
-        Log.d("Helbawy", response.toString());
 
-        Log.d("Helbawy", response.body()?.statusCode.toString())
-        Log.d("Helbawy", response.isSuccessful.toString())
         return response.isSuccessful
     }
 }

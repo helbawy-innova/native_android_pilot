@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SizedBox(height:Double = 0.0,width:Double = 0.0,child: (@Composable ()->Unit)? = null){
-    Box(modifier = Modifier.height(height.dp).width(width.dp)){
+    Box(modifier = Modifier.height(height.dp).width(width.dp) ){
         child
     }
 }

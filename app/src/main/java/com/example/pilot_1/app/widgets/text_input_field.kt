@@ -78,6 +78,7 @@ fun TextInputField(
             modifier = Modifier.fillMaxWidth(),
             isError = (errorMessage?:internalErrorMessage).isNotEmpty(),
             visualTransformation = if (isSecured) PasswordVisualTransformation() else VisualTransformation.None,
+            singleLine = true,
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardType
             ),

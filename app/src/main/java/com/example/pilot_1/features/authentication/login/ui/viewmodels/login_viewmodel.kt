@@ -1,9 +1,8 @@
 package com.example.pilot_1.features.authentication.login.ui.viewmodels
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pilot_1.configurations.AppState
+import com.example.pilot_1.configurations.AppStates
 import com.example.pilot_1.configurations.Cubit
 import com.example.pilot_1.configurations.ErrorState
 import com.example.pilot_1.configurations.InitState
@@ -11,19 +10,19 @@ import com.example.pilot_1.configurations.LoadingState
 import com.example.pilot_1.configurations.SuccessState
 import com.example.pilot_1.features.authentication.login.domain.repos.AuthenticationRepo
 import com.example.pilot_1.features.authentication.login.ui.core.InputValidation
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import com.example.pilot_1.navigation.AppRoutes
+import com.example.pilot_1.navigation.Navigator
+import com.example.pilot_1.navigation.Route
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
     authenticationRepo: AuthenticationRepo
-) : Cubit<AppState>(InitState()) {
+) : Cubit<AppStates>(InitState()) {
     //================================
     //================================ Variables
     //================================
-    var username: String = ""
-    var usernameErrorMessage: String = ""
+    var email: String = ""
+    var emailErrorMessage: String = ""
     var password: String = ""
     var passwordErrorMessage: String = ""
     private val authenticationRepo: AuthenticationRepo
@@ -34,13 +33,13 @@ class LoginViewModel(
     //================================ Functions
     //================================
     private fun validateInputs(): Boolean {
-        usernameErrorMessage = InputValidation.validateUsername(username)
+        emailErrorMessage = InputValidation.validateEmail(email)
         passwordErrorMessage = InputValidation.validatePassword(password)
-        return usernameErrorMessage.isEmpty() && passwordErrorMessage.isEmpty()
+        return emailErrorMessage.isEmpty() && passwordErrorMessage.isEmpty()
     }
 
     private suspend fun _loginRequest() : Boolean {
-        return this.authenticationRepo.login(username, password)
+        return this.authenticationRepo.login(email, password)
     }
     //================================
     //================================ Functions
@@ -51,6 +50,7 @@ class LoginViewModel(
             if (validateInputs()) {
                 try{
                     if (_loginRequest()) {
+                        Navigator.push(Route(routeName = AppRoutes.home), replacement = true)
                         emit(SuccessState())
                     } else {
                         emit(ErrorState())

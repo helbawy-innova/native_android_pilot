@@ -1,9 +1,9 @@
 package com.example.pilot_1.configurations
 
-interface AppState{}
+interface AppStates{}
 
-class LoadingState : AppState{}
-class ErrorState(val message:String? = null) : AppState{}
-class SuccessState : AppState{}
-class EmptyState : AppState{}
-class InitState : AppState{}
+class LoadingState : AppStates{}
+class ErrorState(val message:String? = null) : AppStates{}
+class SuccessState : AppStates{}
+class EmptyState : AppStates{}
+class InitState : AppStates{}

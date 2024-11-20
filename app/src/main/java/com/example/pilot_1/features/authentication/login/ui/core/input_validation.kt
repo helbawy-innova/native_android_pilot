@@ -3,8 +3,15 @@ package com.example.pilot_1.features.authentication.login.ui.core
 object InputValidation{
     fun validateUsername(value:String) : String {
         return when{
-            value.isEmpty() -> "Please write your username"
+            value.isEmpty() -> "Please write your email"
             value.length <= 3 -> "should be more than 3 characters"
+            else -> ""
+        }
+    }
+    fun validateEmail(value:String) : String {
+        return when{
+            value.isEmpty() -> "Please write your email"
+            Regex("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})").matches(value).not() -> "Please enter a valid email"
             else -> ""
         }
     }
